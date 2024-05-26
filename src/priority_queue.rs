@@ -66,6 +66,7 @@ impl<T: Ord> PriorityQueue<T> { //<T: Ord> means that the data type must possess
         }
     }
 
+    #[allow(dead_code)]
     pub fn decrease_key(&mut self,  index: usize, new_key: T) { //decreasing the priority
         if index >= self.nodes.len() {//index is out of bound
             return
