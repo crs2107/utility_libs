@@ -1,5 +1,5 @@
-#[derive(Default,Debug)]
 //<T> means a generic data type parameter i.e you can use PriorityQueue with any data types
+#[derive(Default,Debug)]
 pub struct PriorityQueue<T> {
     nodes: Vec<T>,
 }
