@@ -1,12 +1,12 @@
 #[derive(Default,Debug)]
-//<T> means a generic data type parameter i.e you can use PriorityQueue with any data types
-pub struct PriorityQueue<T> {
+//<T> means a generic data type parameter i.e you can use BinaryHeap with any data types
+pub struct BinaryHeap<T> {
     nodes: Vec<T>,
 }
 
-impl<T: Ord> PriorityQueue<T> { //<T: Ord> means that the data type must possess the trait Ord i.e there should exist an ordering
+impl<T: Ord> BinaryHeap<T> { //<T: Ord> means that the data type must possess the trait Ord i.e there should exist an ordering
     pub fn new() -> Self {
-        PriorityQueue{nodes: Vec::new()}
+        BinaryHeap{nodes: Vec::new()}
     }//constructor 
 
     pub fn push(&mut self, value: T) {
@@ -64,19 +64,6 @@ impl<T: Ord> PriorityQueue<T> { //<T: Ord> means that the data type must possess
                 break ;
             }
         }
-    }
-
-    pub fn decrease_key(&mut self,  index: usize, new_key: T) { //decreasing the priority
-        if index >= self.nodes.len() {//index is out of bound
-            return
-        }
-        if new_key >= self.nodes[index] { //new_key is bigger
-            return
-        }
-
-        self.nodes[index] = new_key ;
-        self.heapify_up(index) ;
-
     }
 
 }

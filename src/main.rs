@@ -2,10 +2,10 @@ use std::cmp::Ordering;
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::env;
+//use binary_heap::BinaryHeap ;
+use changeable_priority_queue::ChangeablePriorityQueue ;
 
-use priority_queue::PriorityQueue;
-
-mod priority_queue;
+mod changeable_priority_queue;
 
 fn main() {
     // Get the file path from command-line arguments
@@ -92,26 +92,29 @@ impl Ord for VerticesWithSD {
 }
 
 fn dijkstra_using_priority_queue(graph: &Vec<Vec<usize>>, number_of_vertices: usize, source: usize)-> Vec<usize> {
+
     let mut dist: Vec<usize>= vec![usize::MAX; number_of_vertices] ;
-    let mut pq = PriorityQueue::<VerticesWithSD>::new();
+    //let mut pq = BinaryHeap::<VerticesWithSD>::new();
+    let mut pq = ChangeablePriorityQueue::new() ; 
 
     dist[source] = 0 ;
 
-    pq.push(VerticesWithSD{ vertex: source ,shortest_distance: 0}); 
-    while let Some(VerticesWithSD{vertex,shortest_distance})=pq.pop() {
-        if shortest_distance > dist[vertex] {
-            continue ;
-        }
+    pq.push(source,0); 
+    while let Some(vertex)=pq.pop() {
+        let current_distance = dist[vertex] ;
+
         for v in 0..number_of_vertices {
             if graph[vertex][v] != 0 {
-                let new_distance = shortest_distance + graph[vertex][v] ;
+                let new_distance = current_distance + graph[vertex][v] ;
                 if dist[v] > new_distance {
                     dist[v]=new_distance ;
-                    pq.push(VerticesWithSD{vertex: v, shortest_distance: new_distance}) ;
+                    //pq.push(VerticesWithSD{vertex: v, shortest_distance: new_distance}) ;
+                    pq.change_priority(vertex, new_distance) ;
 
                 }
 
             }
+
             
         }
     }
