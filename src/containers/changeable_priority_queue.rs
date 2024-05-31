@@ -1,12 +1,8 @@
 use std::collections::{HashMap};
 use std::cmp::Ordering;
 
-use binary_heap::BinaryHeap ;
-mod binary_heap ;
-
-
-
-
+use super::binary_heap::BinaryHeap ;
+// use rust_utils::containers::binary_heap::BinaryHeap;
 
 #[derive(Debug,Eq,PartialEq)]
 struct Element<T> {
@@ -59,5 +55,4 @@ impl<T:Ord + Eq + std::hash::Hash + Clone> ChangeablePriorityQueue<T> {
         }
         None
     }
-
-    }
+}

@@ -2,14 +2,8 @@ use std::cmp::Ordering;
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::env;
-//use binary_heap::BinaryHeap ;
-use changeable_priority_queue::ChangeablePriorityQueue ;
 
-<<<<<<< HEAD
-mod changeable_priority_queue;
-=======
-use rust_utils::containers::priority_queue::PriorityQueue;
->>>>>>> 87f8b9c8d5052bf7db75aa782fe5e0ff96ae617d
+use rust_utils::containers::changeable_priority_queue::ChangeablePriorityQueue;
 
 fn main() {
     // Get the file path from command-line arguments
@@ -112,8 +106,7 @@ fn dijkstra_using_priority_queue(graph: &Vec<Vec<usize>>, number_of_vertices: us
                 let new_distance = current_distance + graph[vertex][v] ;
                 if dist[v] > new_distance {
                     dist[v]=new_distance ;
-                    //pq.push(VerticesWithSD{vertex: v, shortest_distance: new_distance}) ;
-                    pq.change_priority(vertex, new_distance) ;
+                    pq.push(VerticesWithSD{vertex: v, shortest_distance: new_distance}) ;
 
                 }
 

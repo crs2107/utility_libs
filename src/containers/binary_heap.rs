@@ -1,12 +1,6 @@
-<<<<<<<< HEAD:src/binary_heap.rs
 #[derive(Default,Debug)]
 //<T> means a generic data type parameter i.e you can use BinaryHeap with any data types
 pub struct BinaryHeap<T> {
-========
-//<T> means a generic data type parameter i.e you can use PriorityQueue with any data types
-#[derive(Default,Debug)]
-pub struct PriorityQueue<T> {
->>>>>>>> 87f8b9c8d5052bf7db75aa782fe5e0ff96ae617d:src/containers/priority_queue.rs
     nodes: Vec<T>,
 }
 
@@ -71,22 +65,4 @@ impl<T: Ord> BinaryHeap<T> { //<T: Ord> means that the data type must possess th
             }
         }
     }
-
-<<<<<<<< HEAD:src/binary_heap.rs
-========
-    #[allow(dead_code)]
-    pub fn decrease_key(&mut self,  index: usize, new_key: T) { //decreasing the priority
-        if index >= self.nodes.len() {//index is out of bound
-            return
-        }
-        if new_key >= self.nodes[index] { //new_key is bigger
-            return
-        }
-
-        self.nodes[index] = new_key ;
-        self.heapify_up(index) ;
-
-    }
-
->>>>>>>> 87f8b9c8d5052bf7db75aa782fe5e0ff96ae617d:src/containers/priority_queue.rs
 }

@@ -1,3 +1,4 @@
 pub mod containers {
-    pub mod priority_queue ;
+    pub mod binary_heap ;
+    pub mod changeable_priority_queue ;
 }
