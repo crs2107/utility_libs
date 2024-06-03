@@ -1,3 +1,5 @@
+//use std::sync::WaitTimeoutResult;
+
 #[derive(Default,Debug)]
 //<T> means a generic data type parameter i.e you can use BinaryHeap with any data types
 pub struct BinaryHeap<T> {

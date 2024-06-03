@@ -73,7 +73,7 @@ fn main() {
 }
 
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Hash, Clone)]
 struct VerticesWithSD {
     vertex : usize,
     shortest_distance : usize,
@@ -92,22 +92,33 @@ impl Ord for VerticesWithSD {
 fn dijkstra_using_priority_queue(graph: &Vec<Vec<usize>>, number_of_vertices: usize, source: usize)-> Vec<usize> {
 
     let mut dist: Vec<usize>= vec![usize::MAX; number_of_vertices] ;
+    let mut bool_spt: Vec<bool> = vec![false;number_of_vertices] ;// to check if the vertex is already in the queue
     //let mut pq = BinaryHeap::<VerticesWithSD>::new();
     let mut pq = ChangeablePriorityQueue::new() ; 
 
     dist[source] = 0 ;
 
-    pq.push(source,0); 
-    while let Some(vertex)=pq.pop() {
-        let current_distance = dist[vertex] ;
+    pq.push(VerticesWithSD{vertex: source, shortest_distance: 0}); 
+    bool_spt[source] = true ;
+    while let Some(element)=pq.pop() {
+        let current_distance = dist[element.vertex] ;
 
         for v in 0..number_of_vertices {
-            if graph[vertex][v] != 0 {
-                let new_distance = current_distance + graph[vertex][v] ;
+            if graph[element.vertex][v] != 0 {
+                let new_distance = current_distance + graph[element.vertex][v] ;
                 if dist[v] > new_distance {
-                    dist[v]=new_distance ;
-                    pq.push(VerticesWithSD{vertex: v, shortest_distance: new_distance}) ;
 
+                    if bool_spt[v] == false {
+                        dist[v]=new_distance ;
+                        pq.push(VerticesWithSD{vertex: v, shortest_distance: new_distance}) ;
+                        bool_spt[v] = true ;
+                    }
+                    else {
+                        pq.remove(VerticesWithSD{vertex: v, shortest_distance: dist[v]}) ;
+                        dist[v] = new_distance ;
+                        pq.push(VerticesWithSD{vertex: v, shortest_distance: new_distance});
+                        
+                    }
                 }
 
             }
